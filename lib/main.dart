@@ -2,10 +2,17 @@
 // import 'dart:html';
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:randomizer/input_page.dart';
+import 'package:randomizer/random_generator.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(
+    ChangeNotifierProvider(
+      create: (_) => RandomizeChangeNotifier(),
+      child: MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -20,5 +27,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
-

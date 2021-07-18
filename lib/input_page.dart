@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:provider/provider.dart';
+import 'package:randomizer/random_generator.dart';
 import 'package:randomizer/random_page.dart';
 import 'range_form.dart';
 
-class InputPage extends HookWidget {
+class InputPage extends StatelessWidget {
   InputPage({Key? key}) : super(key: key);
 
   final _formKey = GlobalKey<FormState>();
@@ -11,8 +12,7 @@ class InputPage extends HookWidget {
   @override
   Widget build(BuildContext context) {
 
-    final _min = useState<int>(0);
-    final _max = useState<int>(0);
+    
 
     return Container(
       child: Scaffold(
@@ -22,10 +22,10 @@ class InputPage extends HookWidget {
         body: RangeForm(
           formKey: _formKey,
           minField: (value) {
-            _min.value = int.parse(value!);
+            context.read<RandomizeChangeNotifier>().min = int.parse(value!);
           },
           maxField: (value) {
-            _max.value = int.parse(value!);
+            context.read<RandomizeChangeNotifier>().max = int.parse(value!);
           },
         ),
         floatingActionButton: FloatingActionButton(
@@ -33,7 +33,7 @@ class InputPage extends HookWidget {
             if (_formKey.currentState?.validate() == true) {
               _formKey.currentState?.save();
               Navigator.of(context).push(MaterialPageRoute(builder: (context) {
-                return RandomPage(min: _min.value, max: _max.value);
+                return RandomPage();
               }));
 
               //   Navigator.push(context, MaterialPageRoute(builder: (context) {
