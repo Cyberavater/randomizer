@@ -1,18 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:randomizer/random_generator.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:randomizer/main.dart';
 import 'package:randomizer/random_page.dart';
 import 'range_form.dart';
 
-class InputPage extends StatelessWidget {
+class InputPage extends ConsumerWidget {
   InputPage({Key? key}) : super(key: key);
 
   final _formKey = GlobalKey<FormState>();
 
-  @override
-  Widget build(BuildContext context) {
+  
 
-    
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+
+    // final ref
 
     return Container(
       child: Scaffold(
@@ -22,10 +24,11 @@ class InputPage extends StatelessWidget {
         body: RangeForm(
           formKey: _formKey,
           minField: (value) {
-            context.read<RandomizeChangeNotifier>().min = int.parse(value!);
+            // randomize.
+            ref.read(randomize).min = int.parse(value!);
           },
           maxField: (value) {
-            context.read<RandomizeChangeNotifier>().max = int.parse(value!);
+            ref.read(randomize).max = int.parse(value!);
           },
         ),
         floatingActionButton: FloatingActionButton(
@@ -35,10 +38,6 @@ class InputPage extends StatelessWidget {
               Navigator.of(context).push(MaterialPageRoute(builder: (context) {
                 return RandomPage();
               }));
-
-              //   Navigator.push(context, MaterialPageRoute(builder: (context) {
-              //   return RandomPage(min: _min, max: _max);
-              // }));
             }
           },
           child: Icon(Icons.forward),

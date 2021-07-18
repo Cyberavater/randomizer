@@ -1,34 +1,28 @@
-import 'dart:js';
-
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:randomizer/random_generator.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:randomizer/main.dart';
 
-class RandomPage extends StatelessWidget {
+class RandomPage extends ConsumerWidget {
   RandomPage({
     Key? key,
   }) : super(key: key);
 
-  // int? _randomNumber;
-
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       appBar: AppBar(
         title: Text('Random Number'),
       ),
       body: Center(
         child: Text(
-          context.watch<RandomizeChangeNotifier>().randomNumber?.toString() ??
+          ref.watch(randomize).randomNumber?.toString() ??
               'Generate A Random Number',
           style: TextStyle(fontSize: 16),
         ),
       ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
-          // setState(() {
-          context.read<RandomizeChangeNotifier>().generateRandomNumber();
-          // });
+          ref.read(randomize).generateRandomNumber();
         },
         label: Text('Generate'),
       ),

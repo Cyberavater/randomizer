@@ -1,19 +1,16 @@
-// import 'dart:ffi';
-// import 'dart:html';
 
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:randomizer/input_page.dart';
 import 'package:randomizer/random_generator.dart';
 
 void main() {
   runApp(
-    ChangeNotifierProvider(
-      create: (_) => RandomizeChangeNotifier(),
-      child: MyApp(),
-    ),
+    ProviderScope(child: MyApp()),
   );
 }
+
+final randomize = Provider((_) => RandomizeChangeNotifier());
 
 class MyApp extends StatelessWidget {
   @override
