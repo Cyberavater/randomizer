@@ -10,7 +10,7 @@ void main() {
   );
 }
 
-final randomize = ChangeNotifierProvider((_) => RandomizeChangeNotifier());
+final randomize = StateNotifierProvider<RandomizerNotifier, RandomizerState>((_) => RandomizerNotifier());
 
 class MyApp extends StatelessWidget {
   @override

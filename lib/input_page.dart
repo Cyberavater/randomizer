@@ -9,11 +9,8 @@ class InputPage extends ConsumerWidget {
 
   final _formKey = GlobalKey<FormState>();
 
-  
-
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-
     // final ref
 
     return Container(
@@ -25,10 +22,12 @@ class InputPage extends ConsumerWidget {
           formKey: _formKey,
           minField: (value) {
             // randomize.
-            ref.read(randomize).min = int.parse(value!);
+            // ref.read(randomize).min = ;
+            ref.read(randomize.notifier).setMin(int.parse(value!));
           },
           maxField: (value) {
-            ref.read(randomize).max = int.parse(value!);
+            // ref.read(randomize).max = int.parse(value!);
+            ref.read(randomize.notifier).setMax(int.parse(value!));
           },
         ),
         floatingActionButton: FloatingActionButton(

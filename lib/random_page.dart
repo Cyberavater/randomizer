@@ -22,7 +22,7 @@ class RandomPage extends ConsumerWidget {
       ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
-          ref.read(randomize).generateRandomNumber();
+          ref.read(randomize.notifier).generateRandomNumber();
         },
         label: Text('Generate'),
       ),
